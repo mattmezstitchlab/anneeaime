@@ -1,0 +1,155 @@
+@import "tailwindcss";
+
+:root {
+  --c-ink: #0a0a0a;
+  --c-paper: #f6f3ee;
+  --c-ivory: #efe9df;
+  --c-bone: #e8e1d3;
+  --c-photo: #5d5751;
+  --c-line: #1d1b18;
+  --c-line-soft: rgba(10, 11, 18, 0.12);
+  --c-line-on-dark: rgba(246, 243, 238, 0.18);
+
+  --font-serif: 'Cormorant Garamond', 'Times New Roman', serif;
+  --font-display: 'Fraunces', 'Cormorant Garamond', serif;
+  --font-italiana: 'Italiana', 'Cormorant Garamond', serif;
+  --font-grotesque: 'Inter', system-ui, sans-serif;
+
+  color-scheme: light dark;
+}
+
+html, body, #root {
+  height: 100%;
+  background: var(--c-paper);
+  color: var(--c-ink);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  font-family: var(--font-grotesque);
+  font-weight: 300;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--c-ink);
+  color: var(--c-paper);
+}
+
+/* Editorial typography utilities */
+.font-serif { font-family: var(--font-serif); }
+.font-display { font-family: var(--font-display); }
+.font-italiana { font-family: var(--font-italiana); }
+.font-grotesque { font-family: var(--font-grotesque); }
+
+.smallcaps {
+  font-family: var(--font-grotesque);
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 0.72rem;
+}
+
+.micro {
+  font-family: var(--font-grotesque);
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: 0.32em;
+  font-size: 0.62rem;
+}
+
+.editorial-num {
+  font-family: var(--font-italiana);
+  font-weight: 300;
+  font-feature-settings: 'lnum';
+}
+
+/* Paper / ink backgrounds */
+.bg-paper { background-color: var(--c-paper); }
+.bg-ivory { background-color: var(--c-ivory); }
+.bg-bone { background-color: var(--c-bone); }
+.bg-ink { background-color: var(--c-ink); color: var(--c-paper); }
+
+.text-paper { color: var(--c-paper); }
+.text-ink { color: var(--c-ink); }
+.text-photo { color: var(--c-photo); }
+
+/* Lines */
+.hr-soft {
+  border-color: var(--c-line-soft);
+}
+.hr-on-dark {
+  border-color: var(--c-line-on-dark);
+}
+
+/* Cinematic letterbox look */
+.cinema-frame {
+  box-shadow: 0 0 0 1px rgba(255,255,255,0.04);
+}
+
+/* Smooth scroll container with cinematic feel */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Video lazy-fade */
+.video-fade {
+  opacity: 0;
+  transition: opacity 1.2s ease;
+}
+.video-fade.is-loaded {
+  opacity: 1;
+}
+
+/* Subtle grain overlay for cinematic paper feel */
+.grain::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.05;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.6 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+
+/* Reveal mask used by cinematic transitions */
+.reveal-mask {
+  clip-path: inset(0 0 100% 0);
+  transition: clip-path 1.6s cubic-bezier(0.6, 0.05, 0.2, 1);
+}
+.reveal-mask.is-visible {
+  clip-path: inset(0 0 0% 0);
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Hide scrollbar but keep scrollable */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* Mega day number — used in transitions and headers */
+.mega-day {
+  font-family: var(--font-italiana);
+  font-weight: 300;
+  line-height: 0.78;
+  letter-spacing: -0.04em;
+}
+
+/* Page section anchors used by IntersectionObserver */
+.chapter {
+  position: relative;
+}
+
+/* Light container with mobile/desktop layouts sharing same structure */
+.chapter-inner {
+  position: relative;
+}
